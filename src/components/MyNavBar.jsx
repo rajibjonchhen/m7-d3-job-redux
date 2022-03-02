@@ -12,7 +12,7 @@ function MyNavBar() {
                 </Navbar.Brand>
             </Link>
            <Link to="/JobLiked">
-               <span className='text-white' > Job Liked <AiOutlineHeart/></span>
+               <span className='text-white' > Favourite <AiOutlineHeart/></span>
            </Link>
            
         </Container>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import {BsSearch} from 'react-icons/bs'
 import {GiAirplaneArrival} from 'react-icons/gi'
@@ -17,6 +17,9 @@ const Home = ({setSelectedJobArray, setSelectedJob, selectedJob}) => {
       setSearch(find)
     }
     
+    useEffect(() => {
+        fetchData ('search', 'recent')
+    })
   
     const [jobs, setJobs] = useState([])
     const fetchData = async(field, query) => {
@@ -58,7 +61,7 @@ const Home = ({setSelectedJobArray, setSelectedJob, selectedJob}) => {
                             <div className='plane-icon'>
                                     <GiAirplaneArrival/>
                             </div>    
-                        <span className='search-icon' onClick={(e) => {fetchData("search",search)}}>
+                             <span className='search-icon' onClick={(e) => {fetchData("search",search)}}>
                         <BsSearch/>
                         </span>
                     </div>

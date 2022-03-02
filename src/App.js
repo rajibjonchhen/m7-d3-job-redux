@@ -7,7 +7,7 @@ import Home from './components/Home';
 import { useState } from 'react';
 import JobDetail from './components/JobDetail';
 import MyNavBar from './components/MyNavBar';
-import JobLiked from './components/JobLiked';
+import Favourite from './components/Favourite';
 
 function App() {
 
@@ -36,7 +36,7 @@ function App() {
         // setSearchQuery={setSearchQuery} search={search}
 />} />
           <Route path="/JobDetail" element={<JobDetail selectedJob={selectedJob} setSelectedJob={setSelectedJob}/>}/>
-          <Route path="/JobLiked" element={<JobLiked likedJob={likedJob}/>}/>
+          <Route path="/Favourite" element={<Favourite likedJob={likedJob}/>}/>
           <Route path="/category/:category" element={<Category/>}/>
           <Route path="/company/:companyName" element={<Company/>}/>
           
