@@ -48,11 +48,11 @@ const Home = ({setSelectedJobArray, setSelectedJob, selectedJob}) => {
         <Row className="justify-content-center mt-5">
             
                 {
-                categories.map((category, i) => <Col key={i} xs={4} sm={4} md={3} lg={2} xl={2}  onClick={(e) => {fetchData("category", category)}} className="category">{category}</Col>)
+                categories.map((category, i) => <Col key={i} xs={4} sm={4} md={3} lg={2} xl={2}  onClick={(e) => {fetchData("category", category)}} className="category">{category.toUpperCase()}</Col>)
             }
         
         </Row>
-        <Row style={{position:'sticky', top:'72px', background:'white', zIndex:1}}>
+        <Row style={{position:'sticky', top:'72px', background:'white', zIndex:1, margin:'auto'}}>
             <Col sm={12} md={8} lg={6} className='m-auto'>
                 <div className='search-section'>
                     <div className=''>

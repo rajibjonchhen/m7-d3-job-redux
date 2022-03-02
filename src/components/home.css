@@ -1,7 +1,7 @@
 .plane-icon{
-    font-size: 100px;
+    font-size: 80px;
     position: absolute;
-    top: -125px;
+    top: -100px;
 }
 
 .search-icon{
@@ -14,10 +14,12 @@
 
 .search-section{
     height: 140px;
+    width: 400px;
 }
 
 .category{
     background-color: rgb(8, 141, 230);
+    font-size: 14px;
     width:150px;
     height: 50px;
     padding:3px;
