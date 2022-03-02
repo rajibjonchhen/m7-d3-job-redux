@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import SingleJob from "./SingleJob";
 import './home.css'
 import JobDetail from "./JobDetail";
+import Loader from "./Loader";
 const Home = ({setSelectedJobArray, setSelectedJob, selectedJob}) => {
 
     // const navigate = useNavigate()
@@ -22,8 +23,10 @@ const Home = ({setSelectedJobArray, setSelectedJob, selectedJob}) => {
     },[])
   
     const [jobs, setJobs] = useState([])
+
     const fetchData = async(field, query) => {
       try {
+        setIsLoading(true)
         let response = await fetch(`https://strive-jobs-api.herokuapp.com/jobs?${field}=${query}&limit=40`)
         if(response.ok){
           let data = await response.json()
@@ -49,7 +52,7 @@ const Home = ({setSelectedJobArray, setSelectedJob, selectedJob}) => {
             }
         
         </Row>
-        <Row style={{position:'sticky', top:'64px', background:'white', zIndex:1}}>
+        <Row style={{position:'sticky', top:'72px', background:'white', zIndex:1}}>
             <Col sm={12} md={8} lg={6} className='m-auto'>
                 <div className='search-section'>
                     <div className=''>
@@ -73,9 +76,9 @@ const Home = ({setSelectedJobArray, setSelectedJob, selectedJob}) => {
         
         <Row className='d-flex' style={{display:showJobs? 'block':'none'}}>
            
-                {jobs && jobs.map((job,i) =>  <Col xs={12} md={6}>
+                {isLoading? (<Loader/>) :( jobs && jobs.map((job,i) =>  <Col xs={12} md={6} lg={4}>
                  <SingleJob key={job._id} job={job} setSelectedJob={setSelectedJob} setSelectedJobArray={setSelectedJobArray}/>
-                 </Col>)}
+                 </Col>))}
           
             {/* {selectedJob  &&
             <Col>

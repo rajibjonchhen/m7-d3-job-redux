@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { companyLikedAction } from "../redux/actions";
 import SingleJob from "./SingleJob";
-
+import './favourite.css'
 const mapStateToProps = (state) => ({
     favouriteCompanies : state.favourite.favouriteCompanies,
     favouriteJobs : state.favourite.favouriteJobs
@@ -20,9 +20,17 @@ function Favourite({favouriteCompanies, favouriteJobs}) {
 
     return ( 
         <Container>
+                <Row >
+                    <Col className="favourite-sec-nav">
+                   <span>Job Liked</span>
+                   {favouriteCompanies?.map((company,i) => <span key={i}>{company} </span>)}
+                    </Col>
+                </Row>
             <Row>
-                <Col>
+                
+                
                    {favouriteJobs?.map((job,i) => 
+                   <Col xs={12} sm={9} md={6} lg={4}>
                    <div key={i} className='single-job'>
                     <p className='h4'>
                     {job.title}
@@ -47,11 +55,9 @@ function Favourite({favouriteCompanies, favouriteJobs}) {
                     </p>
                     </a>
                     {/* <span className="pointer" onClick= {(e) =>showDetail(job)}> see details</span>  */}
-                        </div>)}
+                        </div>
                 </Col>
-                <Col>
-                   {favouriteCompanies?.map((company,i) => <div key={i}>{company} </div>)}
-                </Col>
+                        )}
             </Row>
         </Container>
      );

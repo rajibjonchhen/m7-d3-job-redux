@@ -13,8 +13,7 @@
 }
 
 .search-section{
-    height: 150px;
-   
+    height: 140px;
 }
 
 .category{
@@ -29,5 +28,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
     
 }

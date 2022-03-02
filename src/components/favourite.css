@@ -1,0 +1,16 @@
+
+
+.favourite-sec-nav{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.favourite-sec-nav>span{
+    font-weight: bold;
+    cursor: pointer;
+    margin: 3px;
+    background-color: rgb(20, 155, 218);
+    padding:5px;
+    border-radius: 5px;
+    width : 140px
+}

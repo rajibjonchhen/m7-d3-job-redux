@@ -59,11 +59,11 @@ const showDetail = (job) => {
            {job.description.replace(/<[^>]+>/g, '')}
         </p>
         <a href={job.url}>
-        <p className='pointer text-wrap'>
+        <div className='pointer text-wrap'>
             {job.url}
-        </p>
+        </div>
         </a>
-            <span className="pointer" onClick= {(e) =>showDetail(job)}> see details</span> 
+            <span className="show-detail" onClick= {(e) =>showDetail(job)}> see details</span> 
              <span className="heart-icon pAbsolute" style={{display:!like? 'block':'none'}} onClick={() => {addToFavouriteJobs(job); setLike(!like)}}><AiOutlineHeart/></span>
             <span className="heart-icon pAbsolute" style={{display:like? 'block':'none'}} onClick={() => {removeFavouriteJobs(job._id); setLike(!like)}}><AiFillHeart/></span>
         </div>
