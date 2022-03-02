@@ -35,4 +35,11 @@
         top:10px;
     }
 
-   
+   .likeBtn {
+     padding : 0 2px 4px 2px;
+     font-size: 15px;
+     border-radius: 3px;
+     background-color: rgb(0, 162, 255);
+     color:white;
+     margin-left: 3px;
+   }

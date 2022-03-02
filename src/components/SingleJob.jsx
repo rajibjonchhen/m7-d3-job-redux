@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Col } from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import './singleJob.css'
-import {AiOutlineHeart, AiFillHeart} from 'react-icons/ai'
+import {AiOutlineHeart, AiFillHeart, AiOutlineLike} from 'react-icons/ai'
 function SingleJob({job, setSelectedJob, setSelectedJobArray}) {
 
 const params  = useParams()
@@ -25,7 +25,12 @@ const showDetail = (job) => {
         
         <Link to={`/company/${job.company_name}`}>
         <p className='h6'>
-           {job.company_name}
+            <span>
+            {job.company_name}
+            </span>
+            <span className="likeBtn">
+            <AiOutlineLike/>
+            </span>
         </p>
         </Link>
        

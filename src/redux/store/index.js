@@ -1,8 +1,9 @@
 import { createStore } from "redux";
 
 export const initialState = {
-    jobs:{
-        jobLiked: []
+    favourite:{
+        favouriteJobs: [],
+        favouriteCompanies: []
     }
 }
 
