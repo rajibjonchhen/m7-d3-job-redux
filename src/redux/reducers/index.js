@@ -7,12 +7,20 @@ const mainReducer = (state = initialState, action) => {
     switch(action.type){
         case JOBS_LIKED: 
         return{
-            
+            ...state,
+            favourite:{
+                ...state.favourite,
+                favouriteJobs: [...state.favourite.favouriteJobs, action.payload]
+            }
         }
         
         case JOBS_REMOVE_LIKED: 
         return{
-
+            ...state,
+            favourite:{
+                ...state.favourite,
+                favouriteJobs: state.favourite.favouriteJobs.filter((job, i ) => i !== action.payload )
+            }
         }
 
         case COMPANY_LIKED: 

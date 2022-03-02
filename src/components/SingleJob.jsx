@@ -1,44 +1,57 @@
 import React, { useState } from "react";
 import { Col } from "react-bootstrap";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import './singleJob.css'
 import {AiOutlineHeart, AiFillHeart, AiOutlineLike} from 'react-icons/ai'
-function SingleJob({job, setSelectedJob, setSelectedJobArray}) {
+import { connect } from "react-redux";
+import { companyLikedAction, josbLikedAction } from "../redux/actions";
 
+
+const mapStateToProps = () => ({})
+
+const mapDispatchToProps = (dispatch) => ({
+    addToFavouriteJobs : (job) =>{
+        dispatch(josbLikedAction(job))
+    },
+
+    addToFavouriteCompanies : (company) => {
+        dispatch(companyLikedAction(company))
+    } 
+})
+
+function SingleJob({job, setSelectedJob, setSelectedJobArray, addToFavouriteCompanies, addToFavouriteJobs}) {
 const params  = useParams()
-const navigate = useNavigate()
-const jobDescription = job.description.replace(/<[^>]+>/g, '');
-const [like, setLike] = useState(false)
+
+// const [like, setLike] = useState(false)
 
 const showDetail = (job) => {
     setSelectedJob(job) 
-    setTimeout( navigate("/JobDetail"), 2000 )
 }
     return ( 
         
         <div className='single-job pRelative'>
-            <span className="heart-icon pAbsolute" style={{display:!like? 'block':'none'}} onClick={() => {setSelectedJobArray(job); setLike(!like)}}><AiOutlineHeart/></span>
-            <span className="heart-icon pAbsolute" style={{display:like? 'block':'none'}} onClick={() => {setSelectedJobArray(job); setLike(!like)}}><AiFillHeart/></span>
+            {/* <span className="heart-icon pAbsolute" style={{display:!like? 'block':'none'}} onClick={() => {setSelectedJobArray(job); setLike(!like)}}><AiOutlineHeart/></span>
+            <span className="heart-icon pAbsolute" style={{display:like? 'block':'none'}} onClick={() => {setSelectedJobArray(job); setLike(!like)}}><AiFillHeart/></span> */}
         <p className='h4'>
            {job.title}
         </p>
         
-        <Link to={`/company/${job.company_name}`}>
         <p className='h6'>
+        <Link to={`/company/${job.company_name}`}>
             <span>
             {job.company_name}
             </span>
-            <span className="likeBtn">
+        </Link>
+            <span className="likeBtn pointer" onClick={(e) => addToFavouriteCompanies(job.company_name)}>
             <AiOutlineLike/>
             </span>
         </p>
-        </Link>
        
         <p className='h6'>
            {job.category}
         </p>
         <p className='description'>
-           {jobDescription}
+           {job.description.replace(/<[^>]+>/g, '')}
         </p>
         <a href={job.url}>
         <p className='pointer text-wrap'>
@@ -46,9 +59,10 @@ const showDetail = (job) => {
         </p>
         </a>
             <span className="pointer" onClick= {(e) =>showDetail(job)}> see details</span> 
+            <span className="like-job pAbsolute" onClick={(e) => addToFavouriteJobs(job)}>Like <AiFillHeart/></span>
         </div>
        
     );
 }
 
-export default SingleJob;
+export default connect(mapStateToProps, mapDispatchToProps)(SingleJob);

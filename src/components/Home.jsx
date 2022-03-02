@@ -12,14 +12,14 @@ const Home = ({setSelectedJobArray, setSelectedJob, selectedJob}) => {
     const[search, setSearch] = useState('')
     const [showJobs, setShowJobs] = useState(false)
     const [showCategory, setShowCategory] = useState(true)
-    
+    const [isLoading, setIsLoading] = useState(true)
     const setSearchQuery = (find) => {
       setSearch(find)
     }
     
     useEffect(() => {
         fetchData ('search', 'recent')
-    })
+    },[])
   
     const [jobs, setJobs] = useState([])
     const fetchData = async(field, query) => {
@@ -30,9 +30,11 @@ const Home = ({setSelectedJobArray, setSelectedJob, selectedJob}) => {
           console.log(data.data)
           setJobs(data.data)
           setShowJobs(true)
+          setIsLoading(false)
         }
-      } catch (error) {
-        
+    } catch (error) {
+        console.log(error) 
+        setIsLoading(false)
       }
     }
   
@@ -70,11 +72,11 @@ const Home = ({setSelectedJobArray, setSelectedJob, selectedJob}) => {
         </Row>
         
         <Row className='d-flex' style={{display:showJobs? 'block':'none'}}>
-            <Col>
-                {jobs && jobs.map((job,i) =>
+           
+                {jobs && jobs.map((job,i) =>  <Col xs={12} md={6}>
                  <SingleJob key={job._id} job={job} setSelectedJob={setSelectedJob} setSelectedJobArray={setSelectedJobArray}/>
-                 )}
-            </Col>
+                 </Col>)}
+          
             {/* {selectedJob  &&
             <Col>
                      <JobDetail selectedJob={selectedJob}/>
