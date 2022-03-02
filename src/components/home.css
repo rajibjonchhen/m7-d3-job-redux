@@ -1,0 +1,36 @@
+.plane-icon{
+    font-size: 100px;
+    position: absolute;
+    top: -125px;
+}
+
+.search-icon{
+    font-size: 15px;
+    position: absolute; 
+    right: 10px;
+    top: 0;
+    cursor: pointer;
+}
+
+.search-section{
+    
+    height: 180px;
+    margin-top: 40px
+   
+
+}
+
+.category{
+    background-color: rgb(8, 141, 230);
+    width:150px;
+    height: 50px;
+    padding:3px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
