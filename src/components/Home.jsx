@@ -74,7 +74,7 @@ const Home = ({setSelectedJobArray, setSelectedJob, selectedJob}) => {
             </Col>
         </Row>
         
-        <Row className='d-flex' style={{display:showJobs? 'block':'none'}}>
+        <Row className='d-flex pt-3' style={{display:showJobs? 'block':'none'}}>
            
                 {isLoading? (<Loader/>) :( jobs && jobs.map((job,i) =>  <Col xs={12} md={6} lg={4}>
                  <SingleJob key={job._id} job={job} setSelectedJob={setSelectedJob} setSelectedJobArray={setSelectedJobArray}/>

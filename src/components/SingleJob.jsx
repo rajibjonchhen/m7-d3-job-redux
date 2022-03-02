@@ -37,7 +37,7 @@ const showDetail = (job) => {
         
         <div className='single-job pRelative'>
            
-        <p className='h4'>
+        <p className='h5' style={{height:'50px'}}>
            {job.title}
         </p>
         

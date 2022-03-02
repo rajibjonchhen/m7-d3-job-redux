@@ -13,7 +13,7 @@
     background-color: rgba(250, 250, 250, 0.438);
     border: 2px solid rgb(151, 95, 95);
     border-radius: 15px;
-    padding:3px;
+    padding:10px;
     margin:10px;
     height:280px;
     box-shadow: 0 0 5px 5px rgba(128, 128, 128, 0.252);
@@ -22,17 +22,18 @@
   .text-wrap{
       color:black;
       white-space: nowrap;
-      overflow: hidden;
+      overflow-y: scroll;
       text-overflow: ellipsis;
       width: 100%;
+      height: 50px;
     } 
 
 
     .heart-icon{
         color: red;
-        font-size: 40px;
-        right:20px;
-        bottom:10px;
+        font-size: 30px;
+        bottom:4px;
+        right: 6px;
     }
 
    .likeBtn {
@@ -44,7 +45,7 @@
      margin-left: 3px;
    }
 
-   .like-job{
+   /* .like-job{
     color: white;
     background-color: rgb(0, 140, 255);
     padding: 2px 3px;
@@ -53,7 +54,7 @@
     bottom:10px;
     right:10px;
     cursor: pointer;
-   }
+   } */
 
    .show-detail{
      position: absolute; 
