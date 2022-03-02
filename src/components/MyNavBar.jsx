@@ -11,7 +11,7 @@ function MyNavBar() {
                     Dream Jobs
                 </Navbar.Brand>
             </Link>
-           <Link to="/JobLiked">
+           <Link to="/Favourite">
                <span className='text-white' > Favourite <AiOutlineHeart/></span>
            </Link>
            

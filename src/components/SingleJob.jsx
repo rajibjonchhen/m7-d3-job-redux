@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Col } from "react-bootstrap";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import './singleJob.css'
 import {AiOutlineHeart, AiFillHeart, AiOutlineLike} from 'react-icons/ai'
 import { connect } from "react-redux";
-import { companyLikedAction, josbLikedAction } from "../redux/actions";
+import { companyLikedAction, jobsRemoveLikedAction, josbLikedAction } from "../redux/actions";
 
 
 const mapStateToProps = () => ({})
@@ -16,22 +16,27 @@ const mapDispatchToProps = (dispatch) => ({
 
     addToFavouriteCompanies : (company) => {
         dispatch(companyLikedAction(company))
-    } 
+    } ,
+
+    removeFavouriteJobs : (jobId) => {
+        dispatch(jobsRemoveLikedAction(jobId))
+    }
 })
 
-function SingleJob({job, setSelectedJob, setSelectedJobArray, addToFavouriteCompanies, addToFavouriteJobs}) {
+function SingleJob({job, setSelectedJob, setSelectedJobArray, addToFavouriteCompanies, addToFavouriteJobs, removeFavouriteJobs}) {
 const params  = useParams()
-
-// const [like, setLike] = useState(false)
+const navigate = useNavigate()
+const [like, setLike] = useState(false)
 
 const showDetail = (job) => {
     setSelectedJob(job) 
+    setTimeout(navigate('/JobDetail', 2000))
+
 }
     return ( 
         
         <div className='single-job pRelative'>
-            {/* <span className="heart-icon pAbsolute" style={{display:!like? 'block':'none'}} onClick={() => {setSelectedJobArray(job); setLike(!like)}}><AiOutlineHeart/></span>
-            <span className="heart-icon pAbsolute" style={{display:like? 'block':'none'}} onClick={() => {setSelectedJobArray(job); setLike(!like)}}><AiFillHeart/></span> */}
+           
         <p className='h4'>
            {job.title}
         </p>
@@ -59,7 +64,8 @@ const showDetail = (job) => {
         </p>
         </a>
             <span className="pointer" onClick= {(e) =>showDetail(job)}> see details</span> 
-            <span className="like-job pAbsolute" onClick={(e) => addToFavouriteJobs(job)}>Like <AiFillHeart/></span>
+             <span className="heart-icon pAbsolute" style={{display:!like? 'block':'none'}} onClick={() => {addToFavouriteJobs(job); setLike(!like)}}><AiOutlineHeart/></span>
+            <span className="heart-icon pAbsolute" style={{display:like? 'block':'none'}} onClick={() => {removeFavouriteJobs(job._id); setLike(!like)}}><AiFillHeart/></span>
         </div>
        
     );

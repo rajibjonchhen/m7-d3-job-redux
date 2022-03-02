@@ -16,7 +16,7 @@
     padding:3px;
     margin:5px;
     height:280px;
-    
+    box-shadow: 0 0 5px 5px rgba(128, 128, 128, 0.252);
   }
 
   .text-wrap{

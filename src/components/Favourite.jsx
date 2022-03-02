@@ -23,7 +23,7 @@ function Favourite({favouriteCompanies, favouriteJobs}) {
             <Row>
                 <Col>
                    {favouriteJobs?.map((job,i) => 
-                   <div key={i}>
+                   <div key={i} className='single-job'>
                     <p className='h4'>
                     {job.title}
                     </p>
