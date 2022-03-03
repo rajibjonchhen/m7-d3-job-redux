@@ -6,3 +6,10 @@
 .brand>span{
     font-size: 25px;
 }
+
+.myNavbar{
+position:sticky;
+z-index:2;
+top:0;
+background-color  : rgb(114, 64, 63) 
+}

@@ -46,16 +46,14 @@ const Home = ({jobs, getJobs, isLoading, isError}) => {
         <Row className="justify-content-center mt-5">
             
                 {
-                categories.map((category, i) => <Col key={i} xs={4} sm={4} md={3} lg={2} xl={2}  onClick={(e) => {getJobs("category", category)}} className="category">{category.toUpperCase()}</Col>)
+                categories.map((category, i) => <Col key={i}   onClick={(e) => {getJobs("category", category)}} className="category">{category.toUpperCase()}</Col>)
             }
         
         </Row>
-        <Row style={{position:'sticky', top:'72px', background:'white', zIndex:1, margin:'auto'}}>
+        <Row style={{position:'sticky', top:'70px', background:'white', zIndex:1, margin:'auto'}}>
             <Col sm={12} md={8} lg={6} className='m-auto'>
                 <div className='search-section'>
                     <div className=''>
-
-                      
                         <p className="h1">We help you land in <br/> your dream job</p>
                     </div>
                     <div className='pRelative'>

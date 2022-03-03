@@ -3,18 +3,17 @@ import { Link } from "react-router-dom";
 import {AiOutlineHeart} from 'react-icons/ai'
 import {GiDreamCatcher} from 'react-icons/gi'
 import './myNavbar.css'
-import { connect } from "react-redux";
 
-const mapStateToProps = () => ({})
-const mapDispatchToProps = () => ({})
 
 function MyNavBar() {
     return ( 
-        <Navbar bg="dark" style={{position:'sticky', zIndex:1, top:0, }}>
+        <Navbar className='myNavbar'  >
         <Container>
             <Link to={"/"}>
                 <Navbar.Brand className='brand text-white h3'>
-                    <span><GiDreamCatcher/></span>
+                    <span>
+                        <GiDreamCatcher/>
+                    </span>
                     Dream Jobs
                 </Navbar.Brand>
             </Link>
@@ -28,4 +27,4 @@ function MyNavBar() {
      );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyNavBar);
+export default MyNavBar;

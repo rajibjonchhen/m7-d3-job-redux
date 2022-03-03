@@ -1,7 +1,8 @@
 import { Col, Container, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { companyLikedAction, jobDetailAction } from "../redux/actions";
+import {BsTrash} from "react-icons/bs"
+import { companyLikedAction, jobDetailAction, jobsRemoveLikedAction } from "../redux/actions";
 import './favourite.css'
 
 
@@ -16,10 +17,15 @@ const mapDispatchToProps = (dispatch) => ({
     } ,
     jobDetail : (job) => {
         dispatch(jobDetailAction(job))
-    }
+    },
+     removeFavouriteJobs : (jobId) => {
+        dispatch(jobsRemoveLikedAction(jobId))
+    },
+
+    
 })
 
-function Favourite({favouriteCompanies, favouriteJobs, jobDetail}) {
+function Favourite({favouriteCompanies, favouriteJobs, jobDetail, removeFavouriteJobs}) {
 
 const showDetail = (job) => {
     jobDetail(job)
@@ -38,8 +44,8 @@ const showDetail = (job) => {
                 
                    {favouriteJobs?.map((job,i) => 
                    <Col xs={12} sm={9} md={6} lg={4}>
-                   <div key={i} className='single-job'>
-                    <p className='h4'>
+                   <div key={i} className='single-job pRelative'>
+                    <p className='h5'>
                     {job.title}
                     </p>
 
@@ -61,7 +67,10 @@ const showDetail = (job) => {
                         {job.url}
                     </p>
                     </a>
+                    <div className='w-100 '>
                     <span className="pointer" onClick= {(e) =>showDetail(job)}> see details</span> 
+                    <span className='remove-job pAbsolute' onClick={() =>{removeFavouriteJobs(job._id)}}><BsTrash/></span>
+                    </div>
                         </div>
                 </Col>
                         )}
