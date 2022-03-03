@@ -22,11 +22,11 @@ const mapDispatchToProps = (dispatch) => ({
     }
 })
 
-const Home = ({setSelectedJob, jobs, getJobs, isLoading, isError}) => {
+const Home = ({jobs, getJobs, isLoading, isError}) => {
 
     // const navigate = useNavigate()
     const[search, setSearch] = useState('')
-    const [showJobs, setShowJobs] = useState(false)
+    
     
     const setSearchQuery = (find) => {
       setSearch(find)
@@ -75,7 +75,7 @@ const Home = ({setSelectedJob, jobs, getJobs, isLoading, isError}) => {
         <Row className='d-flex pt-3'>
            
                 {isLoading? (<Loader/>) :( jobs && jobs.map((job,i) =>  <Col  key={job._id} xs={12} md={6} lg={4}>
-                 <SingleJob job={job} setSelectedJob={setSelectedJob}/>
+                 <SingleJob job={job} />
                  </Col>))}
           
             {/* {selectedJob  &&

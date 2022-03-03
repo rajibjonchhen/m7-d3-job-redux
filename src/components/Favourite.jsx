@@ -1,9 +1,10 @@
 import { Col, Container, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { companyLikedAction } from "../redux/actions";
-import SingleJob from "./SingleJob";
+import { companyLikedAction, jobDetailAction } from "../redux/actions";
 import './favourite.css'
+
+
 const mapStateToProps = (state) => ({
     favouriteCompanies : state.favourite.favouriteCompanies,
     favouriteJobs : state.favourite.favouriteJobs
@@ -12,11 +13,17 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     addToFavouriteCompanies : (company) => {
         dispatch(companyLikedAction(company))
-    } 
+    } ,
+    jobDetail : (job) => {
+        dispatch(jobDetailAction(job))
+    }
 })
 
-function Favourite({favouriteCompanies, favouriteJobs}) {
+function Favourite({favouriteCompanies, favouriteJobs, jobDetail}) {
 
+const showDetail = (job) => {
+    jobDetail(job)
+}
 
     return ( 
         <Container>
@@ -54,7 +61,7 @@ function Favourite({favouriteCompanies, favouriteJobs}) {
                         {job.url}
                     </p>
                     </a>
-                    {/* <span className="pointer" onClick= {(e) =>showDetail(job)}> see details</span>  */}
+                    <span className="pointer" onClick= {(e) =>showDetail(job)}> see details</span> 
                         </div>
                 </Col>
                         )}

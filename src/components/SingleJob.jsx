@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Link, useNavigate, useParams } from "react-router-dom";
 import './singleJob.css'
@@ -31,9 +31,16 @@ const mapDispatchToProps = (dispatch) => ({
 
 function SingleJob({job, favouriteJobs, addToFavouriteCompanies, addToFavouriteJobs, removeFavouriteJobs, jobDetail}) {
 
-const isLiked = !!favouriteJobs.find(item => item._id === job._id )
+
+const [isLiked, setIsLiked ] = useState()
+
+
 const navigate = useNavigate()
-const [like, setLike] = useState(isLiked)
+
+useEffect(() => {
+   let like = !!favouriteJobs.find(item => item._id === job._id )
+   setIsLiked(like)
+})
 
 const showDetail = (job) => {
    jobDetail(job) 
@@ -71,8 +78,8 @@ const showDetail = (job) => {
         </div>
         </a>
             <span className="show-detail" onClick= {(e) =>showDetail(job)}> see details</span> 
-             <span className="heart-icon pAbsolute" style={{display:!like? 'block':'none'}} onClick={() => {addToFavouriteJobs(job); setLike(!like)}}><AiOutlineHeart/></span>
-            <span className="heart-icon pAbsolute" style={{display:like? 'block':'none'}} onClick={() => {removeFavouriteJobs(job._id); setLike(!like)}}><AiFillHeart/></span>
+             <span className="heart-icon pAbsolute" style={{display:!isLiked? 'block':'none'}} onClick={() => {addToFavouriteJobs(job)}}><AiOutlineHeart/></span>
+            <span className="heart-icon pAbsolute" style={{display:isLiked? 'block':'none'}} onClick={() => {removeFavouriteJobs(job._id)}}><AiFillHeart/></span>
         </div>
        
     );

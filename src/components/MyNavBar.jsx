@@ -3,6 +3,11 @@ import { Link } from "react-router-dom";
 import {AiOutlineHeart} from 'react-icons/ai'
 import {GiDreamCatcher} from 'react-icons/gi'
 import './myNavbar.css'
+import { connect } from "react-redux";
+
+const mapStateToProps = () => ({})
+const mapDispatchToProps = () => ({})
+
 function MyNavBar() {
     return ( 
         <Navbar bg="dark" style={{position:'sticky', zIndex:1, top:0, }}>
@@ -23,4 +28,4 @@ function MyNavBar() {
      );
 }
 
-export default MyNavBar;
+export default connect(mapStateToProps, mapDispatchToProps)(MyNavBar);
