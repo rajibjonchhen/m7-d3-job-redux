@@ -68,7 +68,7 @@ const showDetail = (job) => {
                     </p>
                     </a>
                     <div className='w-100 '>
-                    <span className="pointer" onClick= {(e) =>showDetail(job)}> see details</span> 
+                    <span className="show-detail" onClick= {(e) =>showDetail(job)}> see details</span> 
                     <span className='remove-job pAbsolute' onClick={() =>{removeFavouriteJobs(job._id)}}><BsTrash/></span>
                     </div>
                         </div>
