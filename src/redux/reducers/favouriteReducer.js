@@ -3,7 +3,7 @@ import { COMPANY_LIKED, COMPANY_REMOVE_LIKED, JOBS_LIKED, JOBS_REMOVE_LIKED } fr
 import { initialState } from "../store";
 
 
-const mainReducer = (state = initialState, action) => {
+const favouriteReducer = (state = initialState.favourite, action) => {
     switch(action.type){
         case JOBS_LIKED: 
         return{
@@ -45,4 +45,4 @@ const mainReducer = (state = initialState, action) => {
     }
 }
 
-export default mainReducer
+export default favouriteReducer
