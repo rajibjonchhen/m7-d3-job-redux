@@ -7,7 +7,9 @@ import { connect } from "react-redux";
 import { companyLikedAction, jobsRemoveLikedAction, josbLikedAction } from "../redux/actions";
 
 
-const mapStateToProps = () => ({})
+const mapStateToProps = (state) => ({
+    favouriteJobs :  state.favourite.favouriteJobs
+})
 
 const mapDispatchToProps = (dispatch) => ({
     addToFavouriteJobs : (job) =>{
@@ -23,10 +25,12 @@ const mapDispatchToProps = (dispatch) => ({
     }
 })
 
-function SingleJob({job, setSelectedJob, setSelectedJobArray, addToFavouriteCompanies, addToFavouriteJobs, removeFavouriteJobs}) {
+function SingleJob({job, setSelectedJob, favouriteJobs, addToFavouriteCompanies, addToFavouriteJobs, removeFavouriteJobs}) {
+
+const isLiked = !!favouriteJobs.find(item => item._id === job._id )
 const params  = useParams()
 const navigate = useNavigate()
-const [like, setLike] = useState(false)
+const [like, setLike] = useState(isLiked)
 
 const showDetail = (job) => {
     setSelectedJob(job) 
