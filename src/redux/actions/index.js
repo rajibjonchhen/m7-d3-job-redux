@@ -25,11 +25,11 @@ export const companyRemoveLikedAction = (companyIndex) => ({
     payload: companyIndex,
 }) 
 
-export const getJobsAction  = (job) => {
+export const getJobsAction  = (field, query) => {
     return (dispatch, getState) => {
         setTimeout( async() => {
             try {
-                let response = await fetch(`https://strive-jobs-api.herokuapp.com/jobs?search=recent&limit=40`)
+                let response = await fetch(`https://strive-jobs-api.herokuapp.com/jobs?${field}=${query}&limit=40`)
                 if(response.ok){
                     const data = await response.json()
                     dispatch({

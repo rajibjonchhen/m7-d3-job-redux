@@ -4,6 +4,7 @@ import jobsReducer from "../reducers/jobsReducer";
 import thunk from "redux-thunk";
 
 const composeFunction =  window.__REDUX_DEVTOOLS_EXTENSION__  || compose
+
 export const initialState = {
     favourite:{
         favouriteJobs: [],
@@ -19,8 +20,10 @@ const mergedReducer = combineReducers({
     job : jobsReducer,
 })
 
-export const configureStore =  createStore(
-    mainReducer,
+const configureStore =  createStore(
+    mergedReducer,
     initialState,
     composeFunction(applyMiddleware(thunk))
 )
+
+export default configureStore
