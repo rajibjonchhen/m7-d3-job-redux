@@ -8,37 +8,27 @@ const favouriteReducer = (state = initialState.favourite, action) => {
         case JOBS_LIKED: 
         return{
             ...state,
-            favourite:{
-                ...state.favourite,
-                favouriteJobs: [...state.favourite.favouriteJobs, action.payload]
-            }
+            favouriteJobs: [...state.favourite.favouriteJobs, action.payload]
         }
         
         case JOBS_REMOVE_LIKED: 
         return{
             ...state,
-            favourite:{
-                ...state.favourite,
-                favouriteJobs: state.favourite.favouriteJobs.filter((job ) => job._id !== action.payload )
-            }
+            favouriteJobs: state.favourite.favouriteJobs.filter((job ) => job._id !== action.payload )
         }
 
         case COMPANY_LIKED: 
         return{
             ...state,
-            favourite:{
-                ...state.favourite,
-                favouriteCompanies: [...state.favourite.favouriteCompanies, action.payload]
-            }
+            favouriteCompanies: [...state.favourite.favouriteCompanies, action.payload]
+            
         }
         
         case COMPANY_REMOVE_LIKED: 
         return{
             ...state,
-            favourite:{
-                ...state.favourite,
-                favouriteCompanies: state.favourite.favouriteCompanies.filter((company, i ) => i !== action.payload )
-            }
+           favouriteCompanies: state.favourite.favouriteCompanies.filter((company, i ) => i !== action.payload )
+            
         }
         default: 
         return state

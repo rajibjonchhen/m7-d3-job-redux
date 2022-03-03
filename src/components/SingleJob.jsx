@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Col } from "react-bootstrap";
+
 import { Link, useNavigate, useParams } from "react-router-dom";
 import './singleJob.css'
 import {AiOutlineHeart, AiFillHeart, AiOutlineLike} from 'react-icons/ai'
@@ -28,7 +28,6 @@ const mapDispatchToProps = (dispatch) => ({
 function SingleJob({job, setSelectedJob, favouriteJobs, addToFavouriteCompanies, addToFavouriteJobs, removeFavouriteJobs}) {
 
 const isLiked = !!favouriteJobs.find(item => item._id === job._id )
-const params  = useParams()
 const navigate = useNavigate()
 const [like, setLike] = useState(isLiked)
 
