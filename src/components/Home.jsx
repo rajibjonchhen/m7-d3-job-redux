@@ -74,8 +74,8 @@ const Home = ({setSelectedJob, jobs, getJobs, isLoading, isError}) => {
         
         <Row className='d-flex pt-3'>
            
-                {isLoading? (<Loader/>) :( jobs && jobs.map((job,i) =>  <Col xs={12} md={6} lg={4}>
-                 <SingleJob key={job._id} job={job} setSelectedJob={setSelectedJob}/>
+                {isLoading? (<Loader/>) :( jobs && jobs.map((job,i) =>  <Col  key={job._id} xs={12} md={6} lg={4}>
+                 <SingleJob job={job} setSelectedJob={setSelectedJob}/>
                  </Col>))}
           
             {/* {selectedJob  &&

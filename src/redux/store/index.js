@@ -13,7 +13,8 @@ export const initialState = {
     job:{
         jobs:[],
         isLoading:true,
-        isError: false
+        isError: false,
+        jobDetail: {}
     }
 }
 

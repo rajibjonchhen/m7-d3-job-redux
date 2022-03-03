@@ -1,5 +1,11 @@
 import { Col, Container, Row } from "react-bootstrap";
+import { connect } from "react-redux";
 import './jobDetail.css'
+
+const mapStateToProps = (state) => ({
+    selectedJob : state.job.jobDetail
+})
+
 const JobDetail = ({selectedJob}) =>  {
     const jobDescription = selectedJob.description.replace(/<[^>]+>/g, '')
     return ( 
@@ -22,4 +28,4 @@ const JobDetail = ({selectedJob}) =>  {
      );
 }
 
-export default JobDetail;
+export default connect(mapStateToProps)(JobDetail);

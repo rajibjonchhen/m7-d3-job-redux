@@ -1,4 +1,4 @@
-import { GET_JOBS, IS_JOBS_LOADING, JOBS_LOADING_ERROR } from "../actions";
+import { GET_JOBS, IS_JOBS_LOADING, JOBS_LOADING_ERROR, JOB_DETAIL } from "../actions";
 import { initialState } from "../store";
 
 const jobsReducer = ( state = initialState.job, action) => {
@@ -12,14 +12,21 @@ const jobsReducer = ( state = initialState.job, action) => {
             case IS_JOBS_LOADING: 
             return{
                 ...state,
-               isLoading: false
+               isLoading: action.payload
             }
 
             case JOBS_LOADING_ERROR: 
             return{
                 ...state,
-               isError: false
+               isError: action.payload
             }
+
+            case JOB_DETAIL: 
+            return{
+                ...state,
+               jobDetail : action.payload
+            }
+
 
         default: 
             return state

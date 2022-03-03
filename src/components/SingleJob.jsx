@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import './singleJob.css'
 import {AiOutlineHeart, AiFillHeart, AiOutlineLike} from 'react-icons/ai'
 import { connect } from "react-redux";
-import { companyLikedAction, jobsRemoveLikedAction, josbLikedAction } from "../redux/actions";
+import { companyLikedAction, jobDetailAction, jobsRemoveLikedAction, josbLikedAction } from "../redux/actions";
 
 
 const mapStateToProps = (state) => ({
@@ -22,17 +22,21 @@ const mapDispatchToProps = (dispatch) => ({
 
     removeFavouriteJobs : (jobId) => {
         dispatch(jobsRemoveLikedAction(jobId))
+    },
+
+    jobDetail : (job) => {
+        dispatch(jobDetailAction(job))
     }
 })
 
-function SingleJob({job, setSelectedJob, favouriteJobs, addToFavouriteCompanies, addToFavouriteJobs, removeFavouriteJobs}) {
+function SingleJob({job, favouriteJobs, addToFavouriteCompanies, addToFavouriteJobs, removeFavouriteJobs, jobDetail}) {
 
 const isLiked = !!favouriteJobs.find(item => item._id === job._id )
 const navigate = useNavigate()
 const [like, setLike] = useState(isLiked)
 
 const showDetail = (job) => {
-    setSelectedJob(job) 
+   jobDetail(job) 
     setTimeout(navigate('/JobDetail', 2000))
 
 }
