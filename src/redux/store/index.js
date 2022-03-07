@@ -2,6 +2,8 @@ import { createStore, combineReducers, compose, applyMiddleware } from "redux";
 import favouriteReducer from "../reducers/favouriteReducer.js";
 import jobsReducer from "../reducers/jobsReducer.js";
 import thunk from "redux-thunk";
+import localStorage from "redux-persist/lib/storage";
+import { persistReducer, persistStore } from "redux-persist";
 
 const composeFunction =  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__  || compose
 
@@ -18,14 +20,24 @@ export const initialState = {
     }
 }
 
+const persistConfig = {
+key : 'root',
+storage : localStorage
+}
+ 
 const mergedReducer = combineReducers({
     favourite : favouriteReducer,
     job : jobsReducer,
 })
 
-export const configureStore =  createStore(
-    mergedReducer,
+const persistedReducer = persistReducer(persistConfig, mergedReducer)
+
+const configureStore =  createStore(
+    persistedReducer,
     initialState,
     composeFunction(applyMiddleware(thunk))
 )
 
+const persistor = persistStore(configureStore) 
+
+export {configureStore, persistor}
