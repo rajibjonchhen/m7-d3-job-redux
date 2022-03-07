@@ -4,6 +4,7 @@ import jobsReducer from "../reducers/jobsReducer.js";
 import thunk from "redux-thunk";
 import localStorage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
+import { encryptTransform } from "redux-persist-transform-encrypt";
 
 const composeFunction =  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__  || compose
 
@@ -22,7 +23,12 @@ export const initialState = {
 
 const persistConfig = {
 key : 'root',
-storage : localStorage
+storage : localStorage,
+transforms : [
+    encryptTransform({
+        secretKey : "hello-from-the-other-side"
+    })
+]
 }
  
 const mergedReducer = combineReducers({
