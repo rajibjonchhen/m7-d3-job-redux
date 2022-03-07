@@ -1,35 +1,22 @@
 import { Col, Container, Row } from "react-bootstrap";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import {BsTrash} from "react-icons/bs"
 import { companyLikedAction, jobDetailAction, jobsRemoveLikedAction } from "../redux/actions";
 import './favourite.css'
 
 
-const mapStateToProps = (state) => ({
-    favouriteCompanies : state.favourite.favouriteCompanies,
-    favouriteJobs : state.favourite.favouriteJobs
-})
+function Favourite() {
 
-const mapDispatchToProps = (dispatch) => ({
-    addToFavouriteCompanies : (company) => {
-        dispatch(companyLikedAction(company))
-    } ,
-    jobDetail : (job) => {
+const favouriteCompanies = useSelector((state) => state.favourite.favouriteCompanies)
+const  favouriteJobs = useSelector((state) => state.favourite.favouriteJobs)
+const dispatch = useDispatch()
+
+    const showDetail = (job) => {
         dispatch(jobDetailAction(job))
-    },
-     removeFavouriteJobs : (jobId) => {
-        dispatch(jobsRemoveLikedAction(jobId))
-    },
-
-    
-})
-
-function Favourite({favouriteCompanies, favouriteJobs, jobDetail, removeFavouriteJobs}) {
-
-const showDetail = (job) => {
-    jobDetail(job)
 }
+
+
 
     return ( 
         <Container>
@@ -69,7 +56,7 @@ const showDetail = (job) => {
                     </a>
                     <div className='w-100 '>
                     <span className="show-detail" onClick= {(e) =>showDetail(job)}> see details</span> 
-                    <span className='remove-job pAbsolute' onClick={() =>{removeFavouriteJobs(job._id)}}><BsTrash/></span>
+                    <span className='remove-job pAbsolute' onClick={() =>{dispatch(jobsRemoveLikedAction(job._id))}}><BsTrash/></span>
                     </div>
                         </div>
                 </Col>
@@ -79,4 +66,4 @@ const showDetail = (job) => {
      );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Favourite);
+export default Favourite;

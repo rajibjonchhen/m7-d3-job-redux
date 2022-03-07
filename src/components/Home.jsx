@@ -7,46 +7,36 @@ import SingleJob from "./SingleJob";
 import './home.css'
 import JobDetail from "./JobDetail";
 import Loader from "./Loader";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getJobsAction } from "../redux/actions";
 
-const mapStateToProps = (state) => ({
-    jobs : state.job.jobs,
-    isLoading : state.job.isLoading,
-    isError : state.job.isError
-})
 
-const mapDispatchToProps = (dispatch) => ({
-    getJobs : (field, query) => {
-        dispatch(getJobsAction(field, query))
-    }
-})
 
-const Home = ({jobs, getJobs, isLoading, isError}) => {
 
-    // const navigate = useNavigate()
+const Home = () => {
+
+   
     const[search, setSearch] = useState('')
-    
+    const dispatch = useDispatch()
     
     const setSearchQuery = (find) => {
       setSearch(find)
     }
     
+    const jobs = useSelector((state) =>state.job.jobs)
+    const isLoading = useSelector((state) =>state.job.isLoading)
+    const isError = useSelector((state) =>state.job.isError)
     useEffect(() => {
-        getJobs ('search', 'recent')
+        dispatch(getJobsAction('search', 'recent'))
     },[])
   
-
-
-  
-
     const categories = ["it", "business", "Customer Service", "DevOps / Sysadmin", "Finance / Legal", "data", "marketing", "all others", "Software Development", "Human Resources", "Design", "QA"]
     return ( 
     <Container>
         <Row className="justify-content-center mt-5">
             
                 {
-                categories.map((category, i) => <Col key={i}   onClick={(e) => {getJobs("category", category)}} className="category">{category.toUpperCase()}</Col>)
+                categories.map((category, i) => <Col key={i}   onClick={(e) => {dispatch(getJobsAction("category", category))}} className="category">{category.toUpperCase()}</Col>)
             }
         
         </Row>
@@ -62,7 +52,7 @@ const Home = ({jobs, getJobs, isLoading, isError}) => {
                             <div className='plane-icon'>
                                     <GiAirplaneArrival/>
                             </div>    
-                             <span className='search-icon' onClick={(e) => {getJobs("search",search)}}>
+                             <span className='search-icon' onClick={(e) => {dispatch(getJobsAction("search",search))}}>
                         <BsSearch/>
                         </span>
                     </div>
@@ -86,4 +76,4 @@ const Home = ({jobs, getJobs, isLoading, isError}) => {
     </Container> );
 }
 
-export default  connect(mapStateToProps, mapDispatchToProps)(Home);
+export default  Home;

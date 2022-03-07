@@ -4,38 +4,16 @@ import './singleJob.css'
 import {AiOutlineHeart, AiFillHeart, AiOutlineLike} from 'react-icons/ai'
 import { connect } from "react-redux";
 import { companyLikedAction, jobDetailAction, jobsRemoveLikedAction, josbLikedAction } from "../redux/actions";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 
-const mapStateToProps = (state) => ({
-    favouriteJobs :  state.favourite.favouriteJobs
-})
-
-const mapDispatchToProps = (dispatch) => ({
-    addToFavouriteJobs : (job) =>{
-        dispatch(josbLikedAction(job))
-    },
-
-    addToFavouriteCompanies : (company) => {
-        dispatch(companyLikedAction(company))
-    } ,
-
-    removeFavouriteJobs : (jobId) => {
-        dispatch(jobsRemoveLikedAction(jobId))
-    },
-
-    jobDetail : (job) => {
-        dispatch(jobDetailAction(job))
-    }
-})
-
-function SingleJob({job, favouriteJobs, addToFavouriteCompanies, addToFavouriteJobs, removeFavouriteJobs, jobDetail}) {
-
+function SingleJob({job}) {
 
 const [isLiked, setIsLiked ] = useState()
 
-
 const navigate = useNavigate()
+const dispatch = useDispatch()
+const favouriteJobs = useSelector((state) => state.favourite.favouriteJobs)
 
 useEffect(() => {
    let like = !!favouriteJobs.find(item => item._id === job._id )
@@ -43,8 +21,8 @@ useEffect(() => {
 })
 
 const showDetail = (job) => {
-   jobDetail(job) 
-    setTimeout(navigate('/JobDetail', 2000))
+    dispatch(jobDetailAction(job)) 
+    setTimeout(navigate('/JobDetail', 1000))
 
 }
     return ( 
@@ -61,7 +39,7 @@ const showDetail = (job) => {
             {job.company_name}
             </span>
         </Link>
-            <span className="likeBtn pointer" onClick={(e) => addToFavouriteCompanies(job.company_name)}>
+            <span className="likeBtn pointer" onClick={(e) =>  dispatch(companyLikedAction(job.company_name))}>
             <AiOutlineLike/>
             </span>
         </p>
@@ -78,11 +56,11 @@ const showDetail = (job) => {
         </div>
         </a>
             <span className="show-detail" onClick= {(e) =>showDetail(job)}> see details</span> 
-             <span className="heart-icon pAbsolute" style={{display:!isLiked? 'block':'none'}} onClick={() => {addToFavouriteJobs(job)}}><AiOutlineHeart/></span>
-            <span className="heart-icon pAbsolute" style={{display:isLiked? 'block':'none'}} onClick={() => {removeFavouriteJobs(job._id)}}><AiFillHeart/></span>
+             <span className="heart-icon pAbsolute" style={{display:!isLiked? 'block':'none'}} onClick={() => {dispatch(josbLikedAction(job))}}><AiOutlineHeart/></span>
+            <span className="heart-icon pAbsolute" style={{display:isLiked? 'block':'none'}} onClick={() => { dispatch(jobsRemoveLikedAction(job._id))}}><AiFillHeart/></span>
         </div>
        
     );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SingleJob);
+export default SingleJob;

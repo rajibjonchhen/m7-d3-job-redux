@@ -1,12 +1,12 @@
 import { Col, Container, Row } from "react-bootstrap";
 import { connect } from "react-redux";
 import './jobDetail.css'
+import { useSelector } from "react-redux";
 
-const mapStateToProps = (state) => ({
-    selectedJob : state.job.jobDetail
-})
 
-const JobDetail = ({selectedJob}) =>  {
+const JobDetail = () =>  {
+
+    const selectedJob = useSelector((state) => state.job.jobDetail)
     const jobDescription = selectedJob.description.replace(/<[^>]+>/g, '')
     return ( 
 
@@ -28,4 +28,4 @@ const JobDetail = ({selectedJob}) =>  {
      );
 }
 
-export default connect(mapStateToProps)(JobDetail);
+export default JobDetail;
