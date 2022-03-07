@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-
 import { Link, useNavigate, useParams } from "react-router-dom";
 import './singleJob.css'
 import {AiOutlineHeart, AiFillHeart, AiOutlineLike} from 'react-icons/ai'
 import { connect } from "react-redux";
 import { companyLikedAction, jobDetailAction, jobsRemoveLikedAction, josbLikedAction } from "../redux/actions";
+import { useSelector } from "react-redux";
 
 
 const mapStateToProps = (state) => ({
