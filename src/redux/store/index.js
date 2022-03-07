@@ -26,7 +26,7 @@ key : 'root',
 storage : localStorage,
 transforms : [
     encryptTransform({
-        secretKey : "hello-from-the-other-side"
+        secretKey : process.env.REACT_APP_SECRET_PERSIST_KEY 
     })
 ]
 }
