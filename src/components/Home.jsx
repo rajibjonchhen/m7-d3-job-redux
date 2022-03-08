@@ -8,24 +8,27 @@ import './home.css'
 import JobDetail from "./JobDetail";
 import Loader from "./Loader";
 import { useDispatch, useSelector } from "react-redux";
-import { getJobsAction } from "../redux/actions";
+import { getJobsAction, jobDetailAction } from "../redux/actions";
 
 
 
 
 const Home = () => {
 
-   
+   const [showDetail, setShowDetail] = useState(false)
     const[search, setSearch] = useState('')
     const dispatch = useDispatch()
     
     const setSearchQuery = (find) => {
       setSearch(find)
+      dispatch(jobDetailAction({}))
     }
     
     const jobs = useSelector((state) =>state.job.jobs)
+    const selectedJob = useSelector((state) => state.job.selectedJob)
     const isLoading = useSelector((state) =>state.job.isLoading)
     const isError = useSelector((state) =>state.job.isError)
+
     useEffect(() => {
         dispatch(getJobsAction('search', 'recent'))
     },[])
@@ -60,17 +63,19 @@ const Home = () => {
             </Col>
         </Row>
         
-        <Row className='d-flex pt-3'>
+        <Row className='d-flex pt-3' style={{position:"sticky" , top:'500px'}}>
            
-                {isLoading? (<Loader/>) :( jobs && jobs.map((job,i) =>  <Col  key={job._id} xs={12} md={6} lg={4}>
+            <Col xs={12} md={6} lg={4}>
+                {isLoading? (<Loader/>) :( jobs && jobs.map((job,i) =>  <div  key={job._id} >
                  <SingleJob job={job} />
-                 </Col>))}
-          
-            {/* {selectedJob  &&
-            <Col>
-                     <JobDetail selectedJob={selectedJob}/>
+                 </div>))}
             </Col>
-                     } */}
+          
+           
+            <Col >
+           <JobDetail/>    
+        </Col>
+                     
         </Row>
 
     </Container> );

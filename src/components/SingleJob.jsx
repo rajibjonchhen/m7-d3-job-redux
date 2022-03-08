@@ -22,8 +22,6 @@ useEffect(() => {
 
 const showDetail = (job) => {
     dispatch(jobDetailAction(job)) 
-    setTimeout(navigate('/JobDetail', 1000))
-
 }
     return ( 
         
