@@ -7,57 +7,46 @@ import SingleJob from "./SingleJob";
 import './home.css'
 import JobDetail from "./JobDetail";
 import Loader from "./Loader";
-const Home = ({setSelectedJobArray, setSelectedJob, selectedJob}) => {
+import { useDispatch, useSelector } from "react-redux";
+import { getJobsAction, jobDetailAction } from "../redux/actions";
 
-    // const navigate = useNavigate()
+
+
+
+const Home = () => {
+
+   const [showDetail, setShowDetail] = useState(false)
     const[search, setSearch] = useState('')
-    const [showJobs, setShowJobs] = useState(false)
-    const [showCategory, setShowCategory] = useState(true)
-    const [isLoading, setIsLoading] = useState(true)
+    const dispatch = useDispatch()
+    
     const setSearchQuery = (find) => {
       setSearch(find)
+      dispatch(jobDetailAction({}))
     }
     
+    const jobs = useSelector((state) =>state.job.jobs)
+    const selectedJob = useSelector((state) => state.job.selectedJob)
+    const isLoading = useSelector((state) =>state.job.isLoading)
+    const isError = useSelector((state) =>state.job.isError)
+
     useEffect(() => {
-        fetchData ('search', 'recent')
+        dispatch(getJobsAction('search', 'recent'))
     },[])
   
-    const [jobs, setJobs] = useState([])
-
-    const fetchData = async(field, query) => {
-      try {
-        setIsLoading(true)
-        let response = await fetch(`https://strive-jobs-api.herokuapp.com/jobs?${field}=${query}&limit=40`)
-        if(response.ok){
-          let data = await response.json()
-          console.log(data.data)
-          setJobs(data.data)
-          setShowJobs(true)
-          setIsLoading(false)
-        }
-    } catch (error) {
-        console.log(error) 
-        setIsLoading(false)
-      }
-    }
-  
-
     const categories = ["it", "business", "Customer Service", "DevOps / Sysadmin", "Finance / Legal", "data", "marketing", "all others", "Software Development", "Human Resources", "Design", "QA"]
     return ( 
     <Container>
         <Row className="justify-content-center mt-5">
             
                 {
-                categories.map((category, i) => <Col key={i} xs={4} sm={4} md={3} lg={2} xl={2}  onClick={(e) => {fetchData("category", category)}} className="category">{category.toUpperCase()}</Col>)
+                categories.map((category, i) => <Col key={i}   onClick={(e) => {dispatch(getJobsAction("category", category))}} className="category">{category.toUpperCase()}</Col>)
             }
         
         </Row>
-        <Row style={{position:'sticky', top:'72px', background:'white', zIndex:1, margin:'auto'}}>
+        <Row style={{position:'sticky', top:'70px', background:'white', zIndex:1, margin:'auto'}}>
             <Col sm={12} md={8} lg={6} className='m-auto'>
                 <div className='search-section'>
                     <div className=''>
-
-                      
                         <p className="h1">We help you land in <br/> your dream job</p>
                     </div>
                     <div className='pRelative'>
@@ -66,7 +55,7 @@ const Home = ({setSelectedJobArray, setSelectedJob, selectedJob}) => {
                             <div className='plane-icon'>
                                     <GiAirplaneArrival/>
                             </div>    
-                             <span className='search-icon' onClick={(e) => {fetchData("search",search)}}>
+                             <span className='search-icon' onClick={(e) => {dispatch(getJobsAction("search",search))}}>
                         <BsSearch/>
                         </span>
                     </div>
@@ -74,20 +63,22 @@ const Home = ({setSelectedJobArray, setSelectedJob, selectedJob}) => {
             </Col>
         </Row>
         
-        <Row className='d-flex pt-3' style={{display:showJobs? 'block':'none'}}>
+        <Row className='d-flex pt-3' style={{position:"sticky" , top:'500px'}}>
            
-                {isLoading? (<Loader/>) :( jobs && jobs.map((job,i) =>  <Col xs={12} md={6} lg={4}>
-                 <SingleJob key={job._id} job={job} setSelectedJob={setSelectedJob} setSelectedJobArray={setSelectedJobArray}/>
-                 </Col>))}
-          
-            {/* {selectedJob  &&
-            <Col>
-                     <JobDetail selectedJob={selectedJob}/>
+            <Col xs={12} md={6} lg={4}>
+                {isLoading? (<Loader/>) :( jobs && jobs.map((job,i) =>  <div  key={job._id} >
+                 <SingleJob job={job} />
+                 </div>))}
             </Col>
-                     } */}
+          
+           
+            <Col >
+           <JobDetail/>    
+        </Col>
+                     
         </Row>
 
     </Container> );
 }
 
-export default Home;
+export default  Home;

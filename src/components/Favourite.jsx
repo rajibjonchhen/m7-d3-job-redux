@@ -1,21 +1,21 @@
 import { Col, Container, Row } from "react-bootstrap";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { companyLikedAction } from "../redux/actions";
-import SingleJob from "./SingleJob";
+import {BsTrash} from "react-icons/bs"
+import { companyLikedAction, jobDetailAction, jobsRemoveLikedAction } from "../redux/actions";
 import './favourite.css'
-const mapStateToProps = (state) => ({
-    favouriteCompanies : state.favourite.favouriteCompanies,
-    favouriteJobs : state.favourite.favouriteJobs
-})
 
-const mapDispatchToProps = (dispatch) => ({
-    addToFavouriteCompanies : (company) => {
-        dispatch(companyLikedAction(company))
-    } 
-})
 
-function Favourite({favouriteCompanies, favouriteJobs}) {
+function Favourite() {
+
+const favouriteCompanies = useSelector((state) => state.favourite.favouriteCompanies)
+const  favouriteJobs = useSelector((state) => state.favourite.favouriteJobs)
+const dispatch = useDispatch()
+
+    const showDetail = (job) => {
+        dispatch(jobDetailAction(job))
+}
+
 
 
     return ( 
@@ -31,8 +31,8 @@ function Favourite({favouriteCompanies, favouriteJobs}) {
                 
                    {favouriteJobs?.map((job,i) => 
                    <Col xs={12} sm={9} md={6} lg={4}>
-                   <div key={i} className='single-job'>
-                    <p className='h4'>
+                   <div key={i} className='single-job pRelative'>
+                    <p className='h5'>
                     {job.title}
                     </p>
 
@@ -54,7 +54,10 @@ function Favourite({favouriteCompanies, favouriteJobs}) {
                         {job.url}
                     </p>
                     </a>
-                    {/* <span className="pointer" onClick= {(e) =>showDetail(job)}> see details</span>  */}
+                    <div className='w-100 '>
+                    <span className="show-detail" onClick= {(e) =>showDetail(job)}> see details</span> 
+                    <span className='remove-job pAbsolute' onClick={() =>{dispatch(jobsRemoveLikedAction(job._id))}}><BsTrash/></span>
+                    </div>
                         </div>
                 </Col>
                         )}
@@ -63,4 +66,4 @@ function Favourite({favouriteCompanies, favouriteJobs}) {
      );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Favourite);
+export default Favourite;

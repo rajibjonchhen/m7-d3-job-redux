@@ -9,8 +9,16 @@
     font-weight: bold;
     cursor: pointer;
     margin: 3px;
-    background-color: rgb(20, 155, 218);
+    background-color: rgb(220, 155, 118);
     padding:5px;
     border-radius: 5px;
     width : 140px
+}
+
+ .remove-job{
+    color: red;
+    font-size: 20px;
+    bottom:4px;
+    right: 6px;
+    cursor: pointer;
 }
